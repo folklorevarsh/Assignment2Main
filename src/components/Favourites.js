@@ -22,7 +22,7 @@ const Favourites = () => {
     const [loading, setLoading] = useState(false);
 
     const {favourites} = useFavoritesContext();
-    Alert.alert(favourites);
+    
 
     useEffect(() => {
         setLoading(true);
