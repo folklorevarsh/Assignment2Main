@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     image: {
         width: 175,
         height: 175,
-        
+
     },
 
 
@@ -75,7 +75,7 @@ const Home = () => {
     const renderItem = ({ item }) => (
         <View style={styles.wrapper}>
             <View style= {styles.imageWrapper}>
-                <Image source={{ uri: item.image }} style={styles.image} />
+                <Image source={{ uri: item.image }} style={styles.image} resizeMode='contain'/>
             </View>
             <View style ={styles.textWrapper}>
                 <Text styles ={styles.text}>{item.title}</Text>
