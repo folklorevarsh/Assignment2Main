@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
 const SplashScreen = () => (
   <View style={styles.container}>
     <Text style={styles.text}>Shopping App!</Text>
+    <Text style={styles.title}>Welcome to the Shopping App!</Text>
+    <Text style={styles.subtitle}>Browse our products and start shopping.</Text>
   </View>
 );
 
