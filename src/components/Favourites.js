@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 });
 
 const Favorites = () => {
-    const { favorites } = useFavoritesContext();
+    const { favorites, removeFromFavoritesHandler } = useFavoritesContext();
 
     const renderItem = ({ item }) => (
         <View style={styles.wrapper}>
@@ -73,15 +73,15 @@ const Favorites = () => {
             <View>
               <TouchableOpacity 
                 style={styles.addingButton}
+                onPress={() => removeFromFavoritesHandler(item)}
               >
-                <Text style={styles.addingButtonText}>Remove Item from Cart</Text>
+                <Text style={styles.addingButtonText}>Remove Item</Text>
               </TouchableOpacity>
             </View>
           </View>
           <View style={styles.textWrapper}>
             <Text style={styles.text}>{item.title}</Text>
             <Text style={styles.text}>Price: ${item.price}</Text>
-            <Text style={styles.text}>Description: {item.description}</Text>
             <Text style={styles.text}>Category: {item.category}</Text>
             <Text style={styles.text}>Rating: {item.rating.rate} ({item.rating.count} reviews)</Text>
           </View>

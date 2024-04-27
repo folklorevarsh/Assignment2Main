@@ -22,12 +22,22 @@ const FavoritesContextProvider = ({ children }) => {
     setFavorites(newFavourites);
   }, [favorites]);
 
+  const removeFromFavoritesHandler = useCallback((item) => {
+    const oldFavourites = [...favorites];
+
+    const newFavorites = oldFavourites.filter(loopItem => loopItem.id !== item.id);
+    setFavorites(newFavorites);
+  }, 
+  [favorites],
+);
+
   const value = useMemo(
     () => ({
       favorites,
       addToFavoritesHandler,
+      removeFromFavoritesHandler,
     }), 
-    [favorites, addToFavoritesHandler]
+    [favorites, addToFavoritesHandler, removeFromFavoritesHandler]
   );
 
   return (
