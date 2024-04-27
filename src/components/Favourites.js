@@ -1,66 +1,108 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, Image, Alert } from 'react-native';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { Image, StyleSheet, View, SafeAreaView, Text, FlatList, TouchableOpacity } from 'react-native';
 
-import { useFavoritesContext } from './context/favouriteContext';  
-
+import { useFavoritesContext } from './context/favouritesContext';
 
 const styles = StyleSheet.create({
-    // Existing styles...
+    root: {
+        flex: 1,
+        padding: 5,
+        backgroundColor: '#ffffff',
+    },
+    noFavoritesView: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 
-    // Add any additional styles specific to the favorites page here
-    favoriteItem: {
-        backgroundColor: 'lightblue',
+    image: {
+        width: 175,
+        height: 175,
+
+    },
+
+    wrapper: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 25,
+        borderWidth: 1,
+        borderBottomColor: 'green',
         padding: 10,
-        marginVertical: 5,
-        borderRadius: 5,
+
+    },
+
+    imageandButtonWrap:{
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    addingButton:{
+        marginVertical: 10,
+        backgroundColor: 'green',
+        padding: 10,
+        borderRadius: 10,
+    },
+
+    addingButtonText:{ 
+        color: 'white',
+        fontSize: 14,
+
+    },
+
+    imageWrapper:{   
+        flex: 1,
+    },
+
+    textWrapper: {
+        flex: 1,
+        marginVertical:5,
     },
 });
 
-const Favourites = () => {
-    const [favorites, setFavorites] = useState([]);
-    const [loading, setLoading] = useState(false);
-
-    const {favourites} = useFavoritesContext();
-    
-
-    useEffect(() => {
-        setLoading(true);
-        axios
-            .get('https://fakestoreapi.com/products')
-            .then((res) => {
-                setFavorites(res.data);
-            })
-            .catch((e) => console.log(e))
-            .finally(() => {
-                setLoading(false);
-            });
-    }, []);
+const Favorites = () => {
+    const { favorites } = useFavoritesContext();
 
     const renderItem = ({ item }) => (
-        <View style={styles.favoriteItem}>
-            <Image style={styles.image} source={{ uri: item.image }} />
-            <Text>{item.title}</Text>
+        <View style={styles.wrapper}>
+          <View style={styles.imageandButtonWrap}>
+            <View style={styles.imageWrapper}>
+              <Image source={{ uri: item.image }} style={styles.image} resizeMode='contain'/>
+            </View>
+            <View>
+              <TouchableOpacity 
+                style={styles.addingButton}
+              >
+                <Text style={styles.addingButtonText}>Remove Item from Cart</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.textWrapper}>
+            <Text style={styles.text}>{item.title}</Text>
+            <Text style={styles.text}>Price: ${item.price}</Text>
+            <Text style={styles.text}>Description: {item.description}</Text>
+            <Text style={styles.text}>Category: {item.category}</Text>
+            <Text style={styles.text}>Rating: {item.rating.rate} ({item.rating.count} reviews)</Text>
+          </View>
         </View>
-    );
+      );
 
     return (
         <SafeAreaView style={styles.root}>
-            <View style={styles.container}>
-                <Text style={styles.title}>My Favorites</Text>
-            </View>
-            {loading ? (
-                <View style={styles.activityIndicatorContainer}>
-                    <ActivityIndicator size="large" color="black" />
-                </View>
-            ) : null}
-            <FlatList
+            {favorites.length > 0 ? (
+                <FlatList
                 data={favorites}
-                keyExtractor={(item, index) => index.toString()}
+                keyExtractor={(item) => item.id.toString()}
                 renderItem={renderItem}
             />
+            ) : (
+                <View style={styles.noFavoritesView}>
+                    <Text>Favorites are empty! Please add..</Text>
+                </View>
+            )}
         </SafeAreaView>
     );
 };
 
-export default Favourites;
+export default Favorites;

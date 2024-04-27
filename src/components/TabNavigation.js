@@ -36,12 +36,12 @@ const MyTabs = () => {
         }}
       />
       <Tab.Screen
-        name="Favourites"
+        name="Cart"
         component={Favourites}
         options={{
-          tabBarLabel: 'Favourites',
+          tabBarLabel: 'Cart',
           tabBarIcon: ({ color }) => (
-            <Text style={{ color: color, fontSize: 20 }}>❤️</Text>
+            <Text style={{ color: color, fontSize: 20 }}>🛒</Text>
           ),
         }}
       />
