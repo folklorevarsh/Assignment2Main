@@ -1,86 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, Image } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, Image, Alert } from 'react-native';
 import axios from 'axios';
 
+import { useFavoritesContext } from './context/favouriteContext';  
+
+
 const styles = StyleSheet.create({
-    root: {
-        flex: 1,
-        padding:5,
-        backgroundColor: 'white',
-    },
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-    subtitle: {
-        fontSize: 16,
-        color: 'gray',
-    },
-    activityIndicatorContainer: {
-        position: 'absolute',
-    },
-    image: {
-        width: 175,
-        height: 175,
+    // Existing styles...
 
-    },
-
-
-    wrapper: {
-
-        alignContent: 'center',
-        justifyContent: 'center', 
-        alignItems: 'center',
-    },
-
-    imageWrapper:{   
-        flex: 1,
-    },
-
-    textWrapper: {
-        flex: 1,
-        marginVertical:5,
-    },
-
-    categoryChip:{
+    // Add any additional styles specific to the favorites page here
+    favoriteItem: {
+        backgroundColor: 'lightblue',
         padding: 10,
-        backgroundColor: 'green',
-        color: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginVertical:10,
-        borderRadius: 10,
-        width: '50%',
+        marginVertical: 5,
+        borderRadius: 5,
     },
-
-    chipText: {
-        fontSize: 16,
-        fontWeight: 'bold',
-    }
 });
 
-const Categories = () => {
-    const [categories, setCategories] = useState([]);
+const Favourites = () => {
+    const [favorites, setFavorites] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    const {favourites} = useFavoritesContext();
+    Alert.alert(favourites);
 
-    const handleProductSelect = (productId) => {
-        navigation.navigate('ProductDetail', { productId });
-    };
-
-    
     useEffect(() => {
         setLoading(true);
         axios
-            .get('https://fakestoreapi.com/products/categories')
+            .get('https://fakestoreapi.com/products')
             .then((res) => {
-                setCategories(res.data);
+                setFavorites(res.data);
             })
             .catch((e) => console.log(e))
             .finally(() => {
@@ -89,18 +38,16 @@ const Categories = () => {
     }, []);
 
     const renderItem = ({ item }) => (
-        <View style={styles.wrapper}>
-            <View style ={styles.textWrapper}>
-                <Text style={styles.categoryChip}>{item}</Text>
-            </View>
+        <View style={styles.favoriteItem}>
+            <Image style={styles.image} source={{ uri: item.image }} />
+            <Text>{item.title}</Text>
         </View>
     );
 
     return (
         <SafeAreaView style={styles.root}>
             <View style={styles.container}>
-                <Text style={styles.title}>Welcome to the Shopping App!</Text>
-                <Text style={styles.subtitle}>Browse our products and start shopping.</Text>
+                <Text style={styles.title}>My Favorites</Text>
             </View>
             {loading ? (
                 <View style={styles.activityIndicatorContainer}>
@@ -108,7 +55,7 @@ const Categories = () => {
                 </View>
             ) : null}
             <FlatList
-                data={categories}
+                data={favorites}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={renderItem}
             />
@@ -116,4 +63,4 @@ const Categories = () => {
     );
 };
 
-export default Categories;
+export default Favourites;

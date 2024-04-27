@@ -10,14 +10,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import {SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MyTabs from './src/components/TabNavigation';
-
+import FavouritesContextProvider from './src/components/context/favouriteContext';
 
 import type {PropsWithChildren} from 'react';
 
 const App = () => {
   return (
     <NavigationContainer>
-      <MyTabs />
+      <FavouritesContextProvider>
+        <MyTabs />
+      </FavouritesContextProvider>
     </NavigationContainer>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, Image } from 'react-native';
+import { TouchableOpacity,StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, Image } from 'react-native';
 import axios from 'axios';
 
 const styles = StyleSheet.create({
@@ -44,6 +44,25 @@ const styles = StyleSheet.create({
 
     },
 
+    imageandButtonWrap:{
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    addingButton:{
+        marginVertical: 10,
+        backgroundColor: 'green',
+        padding: 10,
+        borderRadius: 10,
+    },
+
+    addingButtonText:{ 
+        color: 'white',
+        fontSize: 14,
+
+    },
+
+
     imageWrapper:{   
         flex: 1,
     },
@@ -74,18 +93,25 @@ const Home = () => {
 
     const renderItem = ({ item }) => (
         <View style={styles.wrapper}>
-            <View style= {styles.imageWrapper}>
-                <Image source={{ uri: item.image }} style={styles.image} resizeMode='contain'/>
+          <View style={styles.imageandButtonWrap}>
+            <View style={styles.imageWrapper}>
+              <Image source={{ uri: item.image }} style={styles.image} resizeMode='contain'/>
             </View>
-            <View style ={styles.textWrapper}>
-                <Text styles ={styles.text}>{item.title}</Text>
-                <Text styles ={styles.text}>Price: {item.price}</Text>
-                <Text styles ={styles.text}>Description: {item.description}</Text>
-                <Text styles ={styles.text}>Category: {item.category}</Text>
-                <Text styles ={styles.text}>Rating: {item.rating.rate} ({item.rating.count} reviews)</Text>
+            <View>
+              <TouchableOpacity style ={styles.addingButton}>
+                <Text style={styles.addingButtonText}>Add to Favourites</Text>
+              </TouchableOpacity>
             </View>
+          </View>
+          <View style={styles.textWrapper}>
+            <Text style={styles.text}>{item.title}</Text>
+            <Text style={styles.text}>Price: ${item.price}</Text>
+            <Text style={styles.text}>Description: {item.description}</Text>
+            <Text style={styles.text}>Category: {item.category}</Text>
+            <Text style={styles.text}>Rating: {item.rating.rate} ({item.rating.count} reviews)</Text>
+          </View>
         </View>
-    );
+      );
 
     return (
         <SafeAreaView style={styles.root}>
