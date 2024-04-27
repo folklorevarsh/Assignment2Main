@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useMemo } from 'react';
+import { Alert } from 'react-native';
 
 const favoritesContext = createContext(null);
 
@@ -15,7 +16,9 @@ export const useFavoritesContext = () => {
 const FavoritesContextProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
 
-  const addToFavoritesHandler = () => {};
+  const addToFavoritesHandler = (item) => {
+    Alert(JSON.stringify(item));
+  };
 
   const value = useMemo(
     () => ({
