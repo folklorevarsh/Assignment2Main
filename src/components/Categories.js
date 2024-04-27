@@ -28,7 +28,7 @@ const Home = () => {
     return (
         <SafeAreaView style={styles.root}>
             <View style={styles.container}>
-                <Text style={styles.title}>Categorie Tab!</Text>
+                <Text style={styles.title}>Categories Tab!</Text>
                 <Text style={styles.subtitle}>Browse our products and start shopping.</Text>
             </View>
         </SafeAreaView>
