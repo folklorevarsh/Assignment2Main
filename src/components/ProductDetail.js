@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 
+
+
 const ProductDetail = ({ route }) => {
     const { productId } = route.params;
     const [product, setProduct] = useState(null);

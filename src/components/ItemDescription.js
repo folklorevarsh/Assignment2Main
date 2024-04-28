@@ -30,6 +30,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
   },
+
+
+  description: {
+    fontSize: 16,
+    padding: 20, 
+    borderWidth: 1, 
+    borderColor: '#D335CC', 
+    borderRadius: 10,
+  },
+
 });
 
 const ItemDescription = ({ route, navigation }) => {
