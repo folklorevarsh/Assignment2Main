@@ -27,7 +27,6 @@ const ProductDetail = ({ route }) => {
             <Text>{product.title}</Text>
             <Text>{product.description}</Text>
             <Text>{product.price}</Text>
-            // Display other product details as needed
         </View>
     );
 };

@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginVertical: 25,
         borderWidth: 1,
-        borderBottomColor: 'green',
+        borderBottomColor: 'purple',
         padding: 10,
 
     },
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 
     addingButton:{
         marginVertical: 10,
-        backgroundColor: 'green',
+        backgroundColor: 'purple',
         padding: 10,
         borderRadius: 10,
     },
@@ -58,6 +58,12 @@ const styles = StyleSheet.create({
     textWrapper: {
         flex: 1,
         marginVertical:5,
+    },
+
+    emptyCartText: {
+        fontSize: 18,
+        color: 'purple',
+        fontStyle: 'bold',
     },
 });
 
@@ -98,7 +104,7 @@ const Favorites = () => {
             />
             ) : (
                 <View style={styles.noFavoritesView}>
-                    <Text>Favorites are empty! Please add..</Text>
+                    <Text style={styles.emptyCartText}>Your cart is empty! Please add products 🛍️ </Text>
                 </View>
             )}
         </SafeAreaView>

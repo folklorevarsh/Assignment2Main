@@ -38,7 +38,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 25,
     borderWidth: 1,
-    borderBottomColor: 'green',
+    borderBottomColor: 'purple',
+    borderTopColor: 'purple',
+    borderRightColor: 'purple',
+    borderLeftColor: 'purple',
     padding: 10,
   },
   imageandButtonWrap: {
@@ -47,19 +50,19 @@ const styles = StyleSheet.create({
   },
   addingButton: {
     marginVertical: 10,
-    backgroundColor: 'green',
+    backgroundColor: '#D334CC',
     padding: 10,
     borderRadius: 10,
   },
   viewingButton: {
     marginVertical: 10,
-    backgroundColor: 'blue',
+    backgroundColor: '#5F47F5',
     padding: 10,
     borderRadius: 10,
   },
   viewingButtonText: {
     color: 'white',
-    fontSize: 10,
+    fontSize: 14,
     alignItems: 'center',
   },
   addingButtonText: {
@@ -106,14 +109,14 @@ const Home = ({ navigation }) => {
             style={styles.addingButton}
             onPress={() => addToFavoritesHandler(item)}
           >
-            <Text style={styles.addingButtonText}>Add to Cart</Text>
+            <Text style={styles.addingButtonText}>🛒 Add to Cart</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.viewingButton}
             onPress={() => navigation.navigate('ItemDescription', { item })}
           >
-            <Text style={styles.viewingButtonText}>View Item Description</Text>
+            <Text style={styles.viewingButtonText}>🔎 Description</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -128,10 +131,6 @@ const Home = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.root}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Welcome to the Shopping App!</Text>
-        <Text style={styles.subtitle}>Browse our products and start shopping.</Text>
-      </View>
       {loading ? (
         <View style={styles.activityIndicatorContainer}>
           <ActivityIndicator size="large" color="black" />

@@ -1,12 +1,16 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Home from './Home';
 import ItemDescription from './ItemDescription'; // Import the ItemDescription component
 import Categories from './Categories';
 import Favourites from './Favourites';
+
+import ProductCategories from './ProductCategories';
+import ItemDescriptionCategory from './ItemDescriptionCategory';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -16,6 +20,8 @@ function HomeStack() {
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="ItemDescription" component={ItemDescription} />
+      <Stack.Screen name="ProductCategories" component={ProductCategories} />
+      <Stack.Screen name="ItemDescriptionCategory" component={ItemDescriptionCategory} />
     </Stack.Navigator>
   );
 }
@@ -25,11 +31,11 @@ const MyTabs = () => {
     <Tab.Navigator
       initialRouteName="Products"
       activeColor="#ffffff"
-      barStyle={{ backgroundColor: 'green' }}
+      barStyle={{ backgroundColor: '#FCB845' }}
     >
       <Tab.Screen
         name="Products"
-        component={HomeStack} // Use the HomeStack as the component for the Products tab
+        component={HomeStack}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color }) => (
@@ -57,6 +63,8 @@ const MyTabs = () => {
           ),
         }}
       />
+
+
     </Tab.Navigator>
   );
 }

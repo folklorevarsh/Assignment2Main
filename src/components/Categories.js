@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, Image } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
     root: {
@@ -28,37 +29,28 @@ const styles = StyleSheet.create({
     image: {
         width: 175,
         height: 175,
-
     },
-
-
     wrapper: {
-
         alignContent: 'center',
         justifyContent: 'center', 
         alignItems: 'center',
     },
-
     imageWrapper:{   
         flex: 1,
     },
-
     textWrapper: {
         flex: 1,
         marginVertical:5,
     },
-
     categoryChip:{
         padding: 10,
-        backgroundColor: 'green',
+        backgroundColor: '#FCB845',
         color: 'white',
         alignItems: 'center',
         justifyContent: 'center',
-        marginVertical:10,
-        borderRadius: 10,
-        width: '50%',
+        fontSize: 16,
+        fontWeight: 'bold',
     },
-
     chipText: {
         fontSize: 16,
         fontWeight: 'bold',
@@ -68,13 +60,12 @@ const styles = StyleSheet.create({
 const Categories = () => {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(false);
+    const navigation = useNavigation();
 
-
-    const handleProductSelect = (productId) => {
-        navigation.navigate('ProductDetail', { productId });
+    const handleCategorySelect = (category) => {
+        navigation.navigate('ProductCategories', { category });
     };
 
-    
     useEffect(() => {
         setLoading(true);
         axios
@@ -89,11 +80,13 @@ const Categories = () => {
     }, []);
 
     const renderItem = ({ item }) => (
-        <View style={styles.wrapper}>
-            <View style ={styles.textWrapper}>
-                <Text style={styles.categoryChip}>{item}</Text>
+        <TouchableOpacity onPress={() => handleCategorySelect(item)}>
+            <View style={styles.wrapper}>
+                <View style ={styles.textWrapper}>
+                    <Text style={styles.categoryChip}>{item}</Text>
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 
     return (
