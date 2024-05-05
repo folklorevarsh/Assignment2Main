@@ -4,8 +4,7 @@ import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, 
 import MyTabs from './src/components/TabNavigation'; 
 import FavouritesContextProvider from './src/components/context/favouritesContext';
 import SplashScreen from './src/components/SplashScreen'; 
-
-
+import { CartProvider } from './src/components/CartContext'; // import CartProvider
 
 import type { PropsWithChildren } from 'react';
 
@@ -26,7 +25,9 @@ const App = () => {
         <SplashScreen />
       ) : (
         <FavouritesContextProvider>
-          <MyTabs />
+          <CartProvider> {/* Wrap MyTabs with CartProvider */}
+            <MyTabs />
+          </CartProvider>
         </FavouritesContextProvider>
       )}
     </NavigationContainer>
@@ -34,5 +35,3 @@ const App = () => {
 };
 
 export default App;
-
-

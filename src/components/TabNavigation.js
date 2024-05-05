@@ -12,6 +12,9 @@ import Favourites from './Favourites';
 import ProductCategories from './ProductCategories';
 import ItemDescriptionCategory from './ItemDescriptionCategory';
 
+import { useCart } from './CartContext'; // import the useCart hook
+
+
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +30,8 @@ function HomeStack() {
 }
 
 const MyTabs = () => {
+  const { totalItems } = useCart(); // get the total items from the cart context
+
   return (
     <Tab.Navigator
       initialRouteName="Products"
@@ -61,6 +66,7 @@ const MyTabs = () => {
           tabBarIcon: ({ color }) => (
             <Text style={{ color: color, fontSize: 20 }}>🛒</Text>
           ),
+          tabBarBadge: totalItems // display the total items as a badge
         }}
       />
 
