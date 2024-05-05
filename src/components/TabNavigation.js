@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -12,8 +12,7 @@ import Favourites from './Favourites';
 import ProductCategories from './ProductCategories';
 import ItemDescriptionCategory from './ItemDescriptionCategory';
 
-import { useCart } from './CartContext'; // import the useCart hook
-
+import { useFavoritesContext } from './context/favouritesContext';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -30,13 +29,18 @@ function HomeStack() {
 }
 
 const MyTabs = () => {
-  const { totalItems } = useCart(); // get the total items from the cart context
+
+  const { favorites } = useFavoritesContext();
+
+  console.log(favorites);
 
   return (
     <Tab.Navigator
+      key={favorites.length}
       initialRouteName="Products"
       activeColor="#ffffff"
       barStyle={{ backgroundColor: '#FCB845' }}
+      
     >
       <Tab.Screen
         name="Products"
@@ -64,9 +68,8 @@ const MyTabs = () => {
         options={{
           tabBarLabel: 'Cart',
           tabBarIcon: ({ color }) => (
-            <Text style={{ color: color, fontSize: 20 }}>🛒</Text>
+            <Text style={{ color: 'black', fontSize: 20 }}>🛒 {String(favorites.length)} </Text>
           ),
-          tabBarBadge: totalItems // display the total items as a badge
         }}
       />
 
