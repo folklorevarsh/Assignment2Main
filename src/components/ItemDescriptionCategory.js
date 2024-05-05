@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     borderColor: '#D335CC', 
     borderRadius: 10,
   },
-  
+
 });
 
 const ItemDescription = ({ route, navigation }) => {
@@ -49,7 +49,7 @@ const ItemDescription = ({ route, navigation }) => {
       <Image source={{ uri: item.image }} style={styles.image} resizeMode='contain' />
       <Text style={styles.title}>{String(item.title)}</Text>
       <Text style={styles.description}>{String(item.description)}</Text>
-      <TouchableOpacity style={styles.addingButton} onPress={() => navigation.navigate('Categories')}>
+      <TouchableOpacity style={styles.addingButton} onPress={() => navigation.navigate('ProductCategory')}>
         <Text style={styles.addingButtonText}>Back</Text>
       </TouchableOpacity>
     </View>
