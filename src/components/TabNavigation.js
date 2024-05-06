@@ -14,6 +14,9 @@ import ItemDescriptionCategory from './ItemDescriptionCategory';
 
 import { useFavoritesContext } from './context/favouritesContext';
 
+
+import { useSelector } from 'react-redux';
+
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -30,7 +33,9 @@ function HomeStack() {
 
 const MyTabs = () => {
 
+  
   const { favorites } = useFavoritesContext();
+  
 
   console.log(favorites);
 
@@ -66,9 +71,9 @@ const MyTabs = () => {
         name="Cart"
         component={Favourites}
         options={{
-          tabBarLabel: 'Cart',
+          tabBarLabel: `Cart`,
           tabBarIcon: ({ color }) => (
-            <Text style={{ color: 'black', fontSize: 20 }}>🛒 {String(favorites.length)} </Text>
+            <Text style={{ color: 'orange', fontSize: 14 }}>🛒{favorites.length}</Text>
           ),
         }}
       />

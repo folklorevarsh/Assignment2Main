@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   addingButton: {
     marginVertical: 5,
-    backgroundColor: 'orange',
+    backgroundColor: 'purple',
     padding: 5,
     borderRadius: 5,
   },
