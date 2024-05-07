@@ -35,7 +35,6 @@ const MyTabs = () => {
 
   
   const { favorites } = useFavoritesContext();
-  
 
   console.log(favorites);
 
