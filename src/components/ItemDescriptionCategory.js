@@ -49,6 +49,6 @@ const ItemDescription = ({ route, navigation }) => {
       </TouchableOpacity>
     </ScrollView>
   );
-};
+};cle
 
 export default ItemDescription;
