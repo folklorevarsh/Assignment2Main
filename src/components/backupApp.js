@@ -1,21 +1,27 @@
+/*
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
 import MyTabs from './src/components/TabNavigation'; 
 import FavouritesContextProvider from './src/components/context/favouritesContext';
 import SplashScreen from './src/components/SplashScreen'; 
 import Login from './src/components/Login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import UserProfile from './src/components/UserProfile';
+
+import type { PropsWithChildren } from 'react';
 
 const App = () => {
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    const clearToken = async () => {
-      await AsyncStorage.removeItem('userToken');
+    const getToken = async () => {
+      const userToken = await AsyncStorage.getItem('userToken');
+      if (userToken !== null) {
+        setToken(userToken);
+      }
     };
   
-    clearToken();
+    getToken();
   }, []);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -28,21 +34,19 @@ const App = () => {
     return () => clearTimeout(timer); // cleanup timer on unmount
   }, []);
 
-  if (isLoading) {
-    return <SplashScreen />;
-  }
-
   return (
     <NavigationContainer>
-      {token ? (
+      {isLoading ? (
+        <SplashScreen />
+      ) : (
         <FavouritesContextProvider>
           <MyTabs />
         </FavouritesContextProvider>
-      ) : (
-        <Login setToken={setToken} />
       )}
     </NavigationContainer>
   );
 };
 
 export default App;
+*/
+

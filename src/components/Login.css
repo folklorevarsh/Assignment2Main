@@ -1,0 +1,41 @@
+.login-container {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid pink;
+    border-radius: 5px;
+    background-color: #ddcf0a;
+  }
+  
+  .login-container h2 {
+    color: pink;
+    text-align: center;
+  }
+  
+  .login-container label {
+    display: block;
+    margin-bottom: 10px;
+    color: pink;
+  }
+  
+  .login-container input[type="text"], .login-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid pink;
+    border-radius: 5px;
+  }
+  
+  .login-container input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: pink;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .login-container input[type="submit"]:hover {
+    background-color: #ff85a2;
+  }
