@@ -9,6 +9,8 @@ import ItemDescription from './ItemDescription'; // Import the ItemDescription c
 import Categories from './Categories';
 import Favourites from './Favourites';
 import UserProfile from './UserProfile';
+import Orders from './Orders';
+import Login from './Login';
 
 import ProductCategories from './ProductCategories';
 import ItemDescriptionCategory from './ItemDescriptionCategory';
@@ -28,7 +30,7 @@ function HomeStack() {
       <Stack.Screen name="ItemDescription" component={ItemDescription} />
       <Stack.Screen name="ProductCategories" component={ProductCategories} />
       <Stack.Screen name="ItemDescriptionCategory" component={ItemDescriptionCategory} />
-      <Tab.Screen name="Profile" children={() => <UserProfile onSignOut={yourSignOutFunction} getUser={getUser} />} />
+      <Stack.Screen name="Profile" children={() => <UserProfile onSignOut={setToken} />} />
     </Stack.Navigator>
   );
 }
@@ -89,6 +91,18 @@ const MyTabs = () => {
           ),
         }}
       />
+
+      <Tab.Screen
+        name="Orders"
+        component={Orders}
+        options={{
+          tabBarLabel: `My Orders`,
+          tabBarIcon: ({ color }) => (
+            <Text style={{ color: 'orange', fontSize: 14 }}>📦</Text>
+          ),
+        }}
+      />
+
     </Tab.Navigator>
   );
 }

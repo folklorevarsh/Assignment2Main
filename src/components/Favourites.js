@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, View, SafeAreaView, Text, FlatList, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, View, Button, SafeAreaView, Text, FlatList, TouchableOpacity } from 'react-native';
 import { useFavoritesContext } from './context/favouritesContext';
 
 const styles = StyleSheet.create({
@@ -60,6 +60,13 @@ const styles = StyleSheet.create({
     fontStyle: 'bold',
   },
 
+  CheckOutButton: {
+    fontSize: 20,
+    color: 'white',
+    fontStyle: 'bold',
+    align: 'center'
+  },
+
   backButton: {
     marginVertical: 5,
     backgroundColor: '#5F47F5',
@@ -81,6 +88,89 @@ const styles = StyleSheet.create({
         },
 
 });
+
+
+const Favorites = () => {
+  const { favorites, removeFromFavoritesHandler, reduceItemCountHandler, addToFavoritesHandler, clearFavorites } = useFavoritesContext();
+
+  const renderItem = ({ item }) => (
+    <View style={styles.wrapper}>
+      <View style={styles.imageandButtonWrap}>
+        <View style={styles.imageWrapper}>
+          <Image source={{ uri: item.image }} style={styles.image} resizeMode='contain' />
+        </View>
+        <View>
+          <TouchableOpacity
+            style={styles.addingButton}
+            onPress={() => removeFromFavoritesHandler(item)}
+          >
+            <Text style={styles.addingButtonText}>Remove Item</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity 
+            style={styles.addingButton}
+            onPress={() => reduceItemCountHandler(item)}
+          >
+            <Text style={styles.addingButtonText}>➖</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.addingQuantity}
+            onPress={() => addToFavoritesHandler(item)}
+          >
+            <Text style={styles.addingButtonText}>➕</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.textWrapper}>
+        <Text style={styles.text}>{item.title}</Text>
+        <Text style={styles.text}>Price: ${item.price}</Text>
+        <Text style={styles.text}>Category: {item.category}</Text>
+        <Text style={styles.text}>Rating: {item.rating.rate} ({item.rating.count} reviews)</Text>
+      </View>
+    </View>
+  );
+
+  return (
+    <SafeAreaView style={styles.root}>
+      <View style={styles.backButton}>
+        <Text style={styles.addingButtonText}>
+          Total items in cart: {favorites.length}
+        </Text>
+      </View>
+      <View style={styles.backButton2}>
+        <Text style={styles.addingButtonText}>
+        💸Cart Subtotal: ${favorites.reduce((total, item) => total + item.price, 0).toFixed(2)}
+        </Text>
+      </View>
+      {favorites.length > 0 ? (
+        <>
+          <FlatList
+            data={favorites}
+            keyExtractor={item => item.id.toString()}
+            renderItem={renderItem}
+          />
+          <TouchableOpacity 
+            style={styles.addingQuantity}
+            onPress={clearFavorites}
+          >
+            <Text style={styles.addingButtonText}>Checkout</Text>
+          </TouchableOpacity>
+        </>
+      ) : (
+        <View style={styles.noFavoritesView}>
+          <Text style={styles.emptyCartText}>Your cart is empty! Please add products 🛍️ </Text>
+        </View>
+      )}
+    </SafeAreaView>
+  );
+};
+
+export default Favorites;
+
+
+
+/*
 
 const Favorites = () => {
   const { favorites, removeFromFavoritesHandler, reduceItemCountHandler, addToFavoritesHandler } = useFavoritesContext();
@@ -151,3 +241,4 @@ const Favorites = () => {
 };
 
 export default Favorites;
+*/

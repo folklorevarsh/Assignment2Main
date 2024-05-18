@@ -14,6 +14,12 @@ export const useFavoritesContext = () => {
 }
 
 const FavoritesContextProvider = ({ children }) => {
+  
+  const clearFavorites = useCallback(() => {
+    setFavorites([]);
+    Alert.alert('Success', 'A new order has been created.');
+  }, []);
+
   const [favorites, setFavorites] = useState([]);
 
   const addToFavoritesHandler = useCallback((item) => {
@@ -64,8 +70,9 @@ const FavoritesContextProvider = ({ children }) => {
     addToFavoritesHandler,
     removeFromFavoritesHandler,
     reduceItemCountHandler,
+    clearFavorites,
     increaseItemCountHandler
-  }), [favorites, addToFavoritesHandler, removeFromFavoritesHandler, reduceItemCountHandler, increaseItemCountHandler]);
+  }), [favorites, addToFavoritesHandler,clearFavorites, removeFromFavoritesHandler, reduceItemCountHandler, increaseItemCountHandler]);
 
   return (
     <FavoritesContext.Provider value={value}>
