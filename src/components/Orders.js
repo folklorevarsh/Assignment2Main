@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,6 +29,11 @@ const styles = StyleSheet.create({
   title: {
     color: 'black',
     textAlign: 'center',
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 5,
+    padding: 10,
+    margin: 10,
   },
   label: {
     marginBottom: 10,
@@ -54,33 +59,50 @@ const styles = StyleSheet.create({
   },
 });
 
-const Order = ({ id, items, total }) => (
-  <View style={styles.box}>
-    <Text style={styles.label}>Order ID: {id}</Text>
-    <Text style={styles.label}>Items: {items}</Text>
-    <Text style={styles.label}>Total: {total}</Text>
-    <Button title="Details" onPress={() => {}} />
-  </View>
-);
-
-const Orders = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.mainTitle}>My Orders</Text>
-      <View>
-        <Text style={styles.title}>New Orders</Text>
-        <Order id="1" items="3" total="$100" />
+const Order = ({ id, items, total }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+  
+    return (
+      <View style={styles.box}>
+        <TouchableOpacity onPress={() => setIsExpanded(!isExpanded)}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Text style={styles.label}>Order ID: {id}</Text>
+            <Text>{isExpanded ? 'Hide Details' : 'Show Details'}</Text>
+          </View>
+          {isExpanded && (
+            <>
+              <Text style={styles.label}>Items: {items}</Text>
+              <Text style={styles.label}>Total: {total}</Text>
+            </>
+          )}
+        </TouchableOpacity>
+        <Button title="Details" onPress={() => {}} />
       </View>
-      <View>
-        <Text style={styles.title}>Paid Orders</Text>
-        <Order id="2" items="2" total="$50" />
+    );
+  };
+  
+  const Orders = () => {
+    const [isExpandedNew, setIsExpandedNew] = useState(false);
+    const [isExpandedPaid, setIsExpandedPaid] = useState(false);
+    const [isExpandedDelivered, setIsExpandedDelivered] = useState(false);
+  
+    return (
+      <View style={styles.container}>
+        <Text style={styles.mainTitle}>My Orders</Text>
+        <TouchableOpacity onPress={() => setIsExpandedNew(!isExpandedNew)}>
+          <Text style={styles.title}>New Orders</Text>
+          {isExpandedNew && <Order id="1" items="3" total="$100" />}
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setIsExpandedPaid(!isExpandedPaid)}>
+          <Text style={styles.title}>Paid Orders</Text>
+          {isExpandedPaid && <Order id="2" items="2" total="$50" />}
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setIsExpandedDelivered(!isExpandedDelivered)}>
+          <Text style={styles.title}>Delivered Orders</Text>
+          {isExpandedDelivered && <Order id="3" items="1" total="$30" />}
+        </TouchableOpacity>
       </View>
-      <View>
-        <Text style={styles.title}>Delivered Orders</Text>
-        <Order id="3" items="1" total="$30" />
-      </View>
-    </View>
-  );
-};
-
-export default Orders;
+    );
+  };
+  
+  export default Orders;
