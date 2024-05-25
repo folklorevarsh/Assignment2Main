@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useMemo, useCallback } from
 import { Alert } from 'react-native';
 
 const FavoritesContext = createContext(null);
-const [CheckoutArray, setCheckoutArray] = useState([]);
+
 
 export const useFavoritesContext = () => {
   const context = useContext(FavoritesContext);
@@ -17,8 +17,6 @@ export const useFavoritesContext = () => {
 const FavoritesContextProvider = ({ children }) => {
   
   const clearFavorites = useCallback(() => {
-    setCheckoutArray(favorites);
-    console.log(favorites);
     setFavorites([]);
     Alert.alert('Success', 'A new order has been created.');
     
