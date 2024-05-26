@@ -94,6 +94,7 @@ const Categories = () => {
             <View style={styles.container}>
                 <Text style={styles.title}>Welcome to the Shopping App!</Text>
                 <Text style={styles.subtitle}>Browse our products and start shopping.</Text>
+                <Text style={styles.subtitle}>This App was developed by Srivarshini Venugopal</Text>
             </View>
             {loading ? (
                 <View style={styles.activityIndicatorContainer}>

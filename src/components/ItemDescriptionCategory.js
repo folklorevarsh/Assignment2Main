@@ -41,8 +41,10 @@ const ItemDescription = ({ route, navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
+      <Text style={styles.title}>Product Details</Text>
       <Image source={{ uri: item.image }} style={styles.image} resizeMode='contain' />
       <Text style={styles.title}>{String(item.title)}</Text>
+      <Text style={styles.details}>Price: {item.price}</Text>
       <Text style={styles.description}>{String(item.description)}</Text>
       <TouchableOpacity style={styles.addingButton} onPress={() => navigation.navigate('Categories')}>
         <Text style={styles.addingButtonText}>Back</Text>
